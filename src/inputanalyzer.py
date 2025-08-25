@@ -1,10 +1,7 @@
 from datasets import load_dataset
 
-# Download the sanitized version (cleaned/tested)
-mbpp = load_dataset("mbpp", "sanitized")
+ds = load_dataset("openai/openai_humaneval")
 
-# Save as CSV
-mbpp["train"].to_csv("mbpp_train.csv", index=False)
-
-# Save as JSON
-mbpp["train"].to_json("mbpp_train.json")
+ds['test'].to_json("humaneval_test.jsonl")
+ds['train'].to_json("humaneval_train.jsonl") if 'train' in ds else None
+ds['validation'].to_json("humaneval_validation.jsonl") if 'validation' in ds else None
